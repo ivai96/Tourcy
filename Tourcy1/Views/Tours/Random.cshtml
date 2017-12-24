@@ -1,0 +1,26 @@
+﻿@model Tourcy1.ViewModels.RandomTourViewModel
+@{
+    ViewBag.Title = "Random";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@{ 
+    var className = Model.Costumers.Count > 5 ? "popular" : null;
+}
+
+<h2 calss="@className">@Model.Tour.Name</h2>
+
+@if(Model.Costumers.Count == 0)
+{
+   <text>No ona has register for this tour.</text>
+}
+else
+{
+  <ul>
+     @foreach (var costumer in Model.Costumers)
+      {
+       <li>@costumer.Name</li>
+      }
+  </ul>
+
+}

@@ -1,0 +1,36 @@
+﻿@model IEnumerable<Tourcy1.Models.Tour>
+@{
+    ViewBag.Title = "Tours";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Tours</h2>
+
+<p>
+    @Html.ActionLink("New Tour", "New", "Tours", null, new { @class = "btn btn-primary"})
+</p>
+
+@if(!Model.Any())
+{
+    <p>We don't have any tours yet.</p>
+}
+else
+{
+    <table class="table table-bordered table-hover">
+        <thead>
+            <tr>
+                <th>Tour</th>
+                <th>Continent</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach(var tour in Model)
+            {
+                <tr>
+                  <td>@Html.ActionLink(tour.Name, "Edit", "Tours", new { id = tour.Id }, null)</td>
+                  <td>@tour.Continent.Name</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

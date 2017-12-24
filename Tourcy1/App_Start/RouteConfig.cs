@@ -13,6 +13,11 @@ namespace Tourcy1
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
+            /*routes.MapRoute(
+                      "MojaRuta",
+                      "myRute/uredi/{id}", new { controller ="Tours", action="Edit"}
+                      , new {id=@"\d{2}"}
+                ); */
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",

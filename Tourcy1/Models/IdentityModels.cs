@@ -20,6 +20,10 @@ namespace Tourcy1.Models
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
+        public DbSet<Customer> Customers { get; set; }
+        public DbSet<Tour> Tours { get; set; }
+        public DbSet<MembershipType> MembershipTypes { get; set; }
+        public DbSet<Continent> Continents { get; set; }
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
         {

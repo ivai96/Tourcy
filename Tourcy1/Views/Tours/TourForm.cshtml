@@ -1,0 +1,47 @@
+﻿@model Tourcy1.ViewModels.NewTourViewModel
+@{
+    ViewBag.Title = Model.Title;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>@Model.Title</h2>
+
+@using (Html.BeginForm("Save", "Tours"))
+{
+    <div class="form-group">
+        @Html.LabelFor(t => t.Tour.Name)
+        @Html.TextBoxFor(t => t.Tour.Name, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Tour.Name)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(t => t.Tour.Description)
+        @Html.TextBoxFor(t => t.Tour.Description, new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(t => t.Tour.Days)
+        @Html.TextBoxFor(t => t.Tour.Days, new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(t => t.Tour.Nights)
+        @Html.TextBoxFor(t => t.Tour.Nights, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Tour.Nights)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(t => t.Tour.Price)
+        @Html.TextBoxFor(t => t.Tour.Price, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Tour.Price)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(t => t.Tour.Capacity)
+        @Html.TextBoxFor(t => t.Tour.Capacity, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Tour.Capacity)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(t => t.Tour.ContinentId)
+        @Html.DropDownListFor(t => t.Tour.ContinentId, new SelectList(Model.Continents, "Id", "Name"), "Select Continent", new { @class = "form-control" })
+    </div>
+
+    @Html.HiddenFor(t => t.Tour.Id)
+    <button type="submit" class="btn btn-primary">Save</button>
+}
+
