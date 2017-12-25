@@ -64,9 +64,7 @@ namespace Tourcy1.Controllers
 
         public ViewResult Index()
          {
-             var customers = _context.Customers.Include(c => c.MembershipType ).ToList() ; //gi zema site customers od bazata
-
-             return View(customers);
+            return View();
          }
  
          public ActionResult Details(int id)

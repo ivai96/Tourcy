@@ -7,7 +7,7 @@ using System.Net.Http;
 using System.Web.Http;
 using Tourcy1.Dtos;
 using Tourcy1.Models;
-
+using System.Data.Entity;
 
 namespace Tourcy1.Controllers.Api
 {
@@ -23,7 +23,10 @@ namespace Tourcy1.Controllers.Api
         // GET /api/customers
         public IEnumerable<CustomerDto> GetCustomers()
         {
-            return _context.Customers.ToList().Select(Mapper.Map<Customer, CustomerDto>);
+            return _context.Customers
+                .Include(c => c.MembershipType)
+                .ToList()
+                .Select(Mapper.Map<Customer, CustomerDto>);
         }
 
         // GET /api/cutomer/1
