@@ -12,16 +12,18 @@ namespace Tourcy1.App_Start
     {
         public MappingProfile()
         {
-            Mapper.CreateMap<Customer, CustomerDto>();
-            Mapper.CreateMap<CustomerDto, Customer>().ForMember(c => c.Id, opt=>opt.Ignore());
+            CreateMap<Customer, CustomerDto>();
+            
+            
+            CreateMap<CustomerDto, Customer>().ForMember(c => c.Id, opt=>opt.Ignore());
 
-            Mapper.CreateMap<MembershipType, MembershipTypeDto>();
+            CreateMap<MembershipType, MembershipTypeDto>();
             //Mapper.CreateMap<CustomerDto, Customer>().ForMember(c => c.Id, opt => opt.Ignore());
 
-            Mapper.CreateMap<Continent, ContinentDto>();
+           CreateMap<Continent, ContinentDto>();
 
-            Mapper.CreateMap<Tour, TourDto>();
-            Mapper.CreateMap<TourDto, Tour>().ForMember(c => c.Id, opt => opt.Ignore());
+           CreateMap<Tour, TourDto>();
+           CreateMap<TourDto, Tour>().ForMember(c => c.Id, opt => opt.Ignore());
         }
     }
 }
