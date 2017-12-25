@@ -18,6 +18,8 @@ namespace Tourcy1.App_Start
             Mapper.CreateMap<MembershipType, MembershipTypeDto>();
             //Mapper.CreateMap<CustomerDto, Customer>().ForMember(c => c.Id, opt => opt.Ignore());
 
+            Mapper.CreateMap<Continent, ContinentDto>();
+
             Mapper.CreateMap<Tour, TourDto>();
             Mapper.CreateMap<TourDto, Tour>().ForMember(c => c.Id, opt => opt.Ignore());
         }

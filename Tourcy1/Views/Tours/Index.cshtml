@@ -10,27 +10,63 @@
     @Html.ActionLink("New Tour", "New", "Tours", null, new { @class = "btn btn-primary"})
 </p>
 
-@if(!Model.Any())
-{
-    <p>We don't have any tours yet.</p>
-}
-else
-{
-    <table class="table table-bordered table-hover">
+    <table id="tours" class="table table-bordered table-hover">
         <thead>
             <tr>
                 <th>Tour</th>
                 <th>Continent</th>
+                <th>Delete</th>
             </tr>
         </thead>
         <tbody>
-            @foreach(var tour in Model)
-            {
-                <tr>
-                  <td>@Html.ActionLink(tour.Name, "Edit", "Tours", new { id = tour.Id }, null)</td>
-                  <td>@tour.Continent.Name</td>
-                </tr>
-            }
         </tbody>
     </table>
+
+@section scripts
+ {
+
+    <script>
+        $(document).ready(function () {
+            var table = $("#tours").DataTable({
+                ajax: {
+                    url: "/api/tours",
+                    dataSrc: ""
+                },
+                columns: [
+                    {
+                        data: "name",
+                        render: function (data, type, tour) {
+                            return "<a href='/tours/edit/" + tour.id + "'>" + tour.name + "</a>";
+                        }
+                    },
+                    {
+                        data: "continent.name"
+                    },
+                    {
+                        data: "id",
+                        render: function (data) {
+                            return "<button class='btn-link js-delete' data-tour-id=" + data + ">Delete</button>";
+                        }
+                    }
+                ]
+            });
+
+
+            $("#tours").on("click", ".js-delete", function () {
+                var button = $(this);
+
+                bootbox.confirm("Dali ste sigurni deka sakate da ja izbrishete ovaja tura?", function (result) {
+                    if (result) {
+                        $.ajax({
+                            url: "/api/tours/" + button.attr("data-tour-id"),
+                            method: "DELETE",
+                            success: function () {
+                                table.row(button.parents("tr")).remove().draw();
+                            }
+                        });
+                    }
+                });
+            });
+        });
+    </script>
 }

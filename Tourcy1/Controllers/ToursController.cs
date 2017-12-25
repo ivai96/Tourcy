@@ -79,9 +79,7 @@ namespace Tourcy1.Controllers
 // GET: Tours/Random
         public ViewResult Index()
         {
-            var tours = _context.Tours.Include(t => t.Continent).ToList();
-
-            return View(tours);
+            return View();
         }
 
         public ActionResult Details(int id)
