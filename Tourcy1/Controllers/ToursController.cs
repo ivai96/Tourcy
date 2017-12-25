@@ -23,7 +23,7 @@ namespace Tourcy1.Controllers
             _context.Dispose();
         }
 
-        [Authorize(Roles = RoleName.CanManageMovies)]
+        [Authorize(Roles = RoleName.CanManageTours)]
         public ViewResult New()
          {
              var continents = _context.Continents.ToList();
@@ -80,7 +80,7 @@ namespace Tourcy1.Controllers
 // GET: Tours/Random
         public ViewResult Index()
         {
-            if(User.IsInRole(RoleName.CanManageMovies))
+            if(User.IsInRole(RoleName.CanManageTours))
                 return View("Index");
             else
                 return View("ReadOnlyList");
@@ -97,7 +97,7 @@ namespace Tourcy1.Controllers
             return View(tours);
         }
 
-        [Authorize(Roles = RoleName.CanManageMovies)]
+        [Authorize(Roles = RoleName.CanManageTours)]
         public ActionResult Edit(int id)
         {
             var tour = _context.Tours.SingleOrDefault(t => t.Id == id);

@@ -23,6 +23,7 @@ namespace Tourcy1.Controllers
             _context.Dispose();
         }
 
+        [Authorize(Roles = RoleName.CanManageTours)]
         public  ActionResult New()
         {
             var membershipTypes = _context.MembershipTypes.ToList();
@@ -64,7 +65,10 @@ namespace Tourcy1.Controllers
 
         public ViewResult Index()
          {
-            return View();
+            if(User.IsInRole(RoleName.CanManageTours))
+                return View("Index");
+            else
+                return View("ReadOnlyList");
          }
  
          public ActionResult Details(int id)

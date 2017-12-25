@@ -54,9 +54,9 @@ namespace Tourcy1
             //   consumerKey: "",
             //   consumerSecret: "");
 
-            //app.UseFacebookAuthentication(
-            //   appId: "",
-            //   appSecret: "");
+            app.UseFacebookAuthentication(
+               appId: "1578441622247509",
+               appSecret: "4aa50bbfa7f52857c5dc6865e3bcce2d");
 
             //app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
             //{
