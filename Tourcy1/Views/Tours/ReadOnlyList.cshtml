@@ -1,0 +1,41 @@
+﻿@model IEnumerable<Tourcy1.Models.Tour>
+@{
+    ViewBag.Title = "Tours";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Tours</h2>
+
+    <table id="tours" class="table table-bordered table-hover">
+        <thead>
+            <tr>
+                <th>Tour</th>
+                <th>Continent</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+
+@section scripts
+ {
+
+    <script>
+        $(document).ready(function () {
+            var table = $("#tours").DataTable({
+                ajax: {
+                    url: "/api/tours",
+                    dataSrc: ""
+                },
+                columns: [
+                    {
+                        data: "name"                        
+                    },
+                    {
+                        data: "continent.name"
+                    }                   
+                ]
+            });          
+        });
+    </script>
+}

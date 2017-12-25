@@ -23,6 +23,7 @@ namespace Tourcy1.Controllers
             _context.Dispose();
         }
 
+        [Authorize(Roles = RoleName.CanManageMovies)]
         public ViewResult New()
          {
              var continents = _context.Continents.ToList();
@@ -35,6 +36,7 @@ namespace Tourcy1.Controllers
             return View("TourForm", viewModel);
          }
 
+        
         [HttpPost]
         public ActionResult Save(Tour tour)
         {
@@ -73,13 +75,16 @@ namespace Tourcy1.Controllers
                 Console.WriteLine(e);
             }
             
-
             return RedirectToAction("Index", "Tours");
         }
 // GET: Tours/Random
         public ViewResult Index()
         {
-            return View();
+            if(User.IsInRole(RoleName.CanManageMovies))
+                return View("Index");
+            else
+                return View("ReadOnlyList");
+       
         }
 
         public ActionResult Details(int id)
@@ -92,6 +97,7 @@ namespace Tourcy1.Controllers
             return View(tours);
         }
 
+        [Authorize(Roles = RoleName.CanManageMovies)]
         public ActionResult Edit(int id)
         {
             var tour = _context.Tours.SingleOrDefault(t => t.Id == id);

@@ -269,6 +269,14 @@
     <Compile Include="Migrations\201712201719517_PopulateContinent.Designer.cs">
       <DependentUpon>201712201719517_PopulateContinent.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201712250305240_SeedUsers.cs" />
+    <Compile Include="Migrations\201712250305240_SeedUsers.Designer.cs">
+      <DependentUpon>201712250305240_SeedUsers.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201712251356140_SeedUsers1.cs" />
+    <Compile Include="Migrations\201712251356140_SeedUsers1.Designer.cs">
+      <DependentUpon>201712251356140_SeedUsers1.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Continent.cs" />
@@ -524,6 +532,7 @@
     <Content Include="Views\Tours\Details.cshtml" />
     <Content Include="Views\Customers\CustomerForm.cshtml" />
     <Content Include="Views\Tours\TourForm.cshtml" />
+    <Content Include="Views\Tours\ReadOnlyList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -580,6 +589,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201712201719517_PopulateContinent.resx">
       <DependentUpon>201712201719517_PopulateContinent.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712250305240_SeedUsers.resx">
+      <DependentUpon>201712250305240_SeedUsers.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712251356140_SeedUsers1.resx">
+      <DependentUpon>201712251356140_SeedUsers1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
