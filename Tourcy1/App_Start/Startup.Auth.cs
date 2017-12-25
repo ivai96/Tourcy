@@ -58,11 +58,11 @@ namespace Tourcy1
                appId: "1578441622247509",
                appSecret: "4aa50bbfa7f52857c5dc6865e3bcce2d");
 
-            //app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
-            //{
-            //    ClientId = "",
-            //    ClientSecret = ""
-            //});
+            app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
+              {
+                ClientId = "700174584399-jgbb39c1edlhohnrabdng6g80f25ph3s.apps.googleusercontent.com",
+                ClientSecret = "uv4JpGKYCr_0PZx8B7xaKdI3"
+            });
         }
     }
 }
