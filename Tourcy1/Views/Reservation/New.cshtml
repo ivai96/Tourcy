@@ -1,0 +1,127 @@
+﻿@model dynamic
+
+@{
+    ViewBag.Title = "New Reservation Form";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>New Reservation Form</h2>
+
+<form id="newReservation">
+    <div class="form-group">
+        <label>Customer</label>
+        <div class="tt-container">
+            <input id="customer" name="customer" data-rule-validCustomer="true" type="text" value="" class="form-control" required />
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label>Tour</label>
+        <div class="tt-container">
+            <input id ="tour" name="tour" data-rule-atLeastOneTour="true" type="text" value="" class="form-control"/>
+        </div>
+    </div>
+
+    <div class="row">
+         <div class="col-md-4 col-sm-4">
+            <ul id="tours" class="list group"></ul>
+         </div>
+    </div>
+
+            <button class="btn btn-primary">Submit</button>
+
+</form>
+
+@section scripts
+{
+    @Scripts.Render("~/bundles/jqueryval")
+    <script>
+        $(document).ready(function () {
+
+            var vm = {
+                tourIds: []
+            };
+
+            var customers = new Bloodhound({
+                datumTokenizer: Bloodhound.tokenizers.obj.whitespace('name'),
+                queryTokenizer: Bloodhound.tokenizers.whitespace,
+                remote: {
+                    url: '/api/customers?query=%QUERY',
+                    wildcard: '%QUERY'
+                }
+            });
+
+            $('#customer').typeahead({
+                minLength: 2,
+                highlight: true
+            }, {
+                name: 'customers',
+                display: 'name',
+                source: customers
+            }).on("typeahead:select", function(e, customer) {
+                vm.customerId = customer.id;
+            });
+
+            var tours = new Bloodhound({
+                datumTokenizer: Bloodhound.tokenizers.obj.whitespace('name'),
+                queryTokenizer: Bloodhound.tokenizers.whitespace,
+                remote: {
+                    url: '/api/tours?query=%QUERY',
+                    wildcard: '%QUERY'
+                }
+            });
+
+            $('#tour').typeahead({
+                minLength: 1,
+                highlight: true
+            }, {
+                name: 'tours',
+                display: 'name',
+                source: tours
+            }).on("typeahead:select", function(e, tour) {
+                $("#tours").append("<li class='list-group-item'>" + tour.name + "</li>");
+
+                $("#tour").typeahead("val", "");
+
+                vm.tourIds.push(tour.id);
+            });
+
+            $.validator.addMethod("validCustomer", function () {
+                return vm.customerId && vm.customerId !== 0;
+            }, "Ve molime da vnesete validen korisnik.");
+
+            $.validator.addMethod("atLeastOneTour", function () {
+                return vm.tourIds.length > 0;
+            }, "Ve molime da vnesete barem edna tura.");
+
+
+           var validator = $("#newReservation").validate({
+                submitHandler: function () {
+                    
+                    $.ajax({
+                        url: "/api/Reservation",
+                        method: "post",
+                        data: vm
+                    })
+                        .done(function () {
+                            toastr.success("Rezervacijata e uspeshna!");
+
+                            $("#customer").typeahead("val", "");
+                            $("#tour").typeahead("val", "");
+                            $("#tours").empty();
+
+                            vm = { tourIds: [] };
+
+                            validator.resetForm();
+                        })
+                        .fail(function () {
+                            toastr.error("Se sluci nekoja greska.");
+                        });
+
+                    return false;
+                }
+            });
+
+        });
+    </script>
+}

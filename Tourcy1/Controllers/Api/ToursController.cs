@@ -21,10 +21,16 @@ namespace Tourcy1.Controllers.Api
         }
 
         // GET /api/tours
-        public IEnumerable<TourDto> GetTours()
+        public IEnumerable<TourDto> GetTours(string query = null)
         {
-            return _context.Tours
-                 .Include(t => t.Continent)
+            var toursQuery = _context.Tours
+             .Include(t => t.Continent)
+             .Where(t => t.AvailableCapacity > 0);
+
+            if (!String.IsNullOrWhiteSpace(query))
+                toursQuery = toursQuery.Where(t => t.Name.Contains(query));
+
+                return toursQuery
                  .ToList()
                  .Select(Mapper.Map<Tour, TourDto>);
         }

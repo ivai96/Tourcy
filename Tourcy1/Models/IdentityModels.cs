@@ -24,6 +24,8 @@ namespace Tourcy1.Models
         public DbSet<Tour> Tours { get; set; }
         public DbSet<MembershipType> MembershipTypes { get; set; }
         public DbSet<Continent> Continents { get; set; }
+        public DbSet<Reservation> Reservations { get; set; }
+
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
         {

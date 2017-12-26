@@ -36,8 +36,12 @@ namespace Tourcy1.Models
         public int Price { get; set; }
 
         [Required]
-        [Display(Name = "Remaining capacity")]
-        [Range(0, 50)]
+        [Range(0, 20)]
         public byte Capacity { get; set; }
+
+        [Required]
+        [Display(Name = "Remaining capacity")]
+        [Range(0, 20)]
+        public byte AvailableCapacity { get; set; }
     }
 }
