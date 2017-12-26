@@ -55,3 +55,6 @@
     .tt-container {
         position: relative;
     }
+.typeahead {
+    background-color: #868fc3;
+}
